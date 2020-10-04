@@ -1,5 +1,6 @@
 import 'package:first_app/image.dart';
 import 'package:first_app/main.dart';
+import 'package:first_app/uitls/Constants.dart';
 import 'package:flutter/material.dart';
 
 import 'Homepage.dart';
@@ -58,10 +59,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       RaisedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => HomePage()));
+                          Constants.prefs.setBool("LoggedIn", true);
+                          Navigator.pushReplacementNamed(context, "/home");
                         },
                         child: Text("Sign In"),
                         color: Colors.amber,

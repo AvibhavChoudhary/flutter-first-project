@@ -1,3 +1,4 @@
+import 'package:first_app/uitls/Constants.dart';
 import 'package:flutter/material.dart';
 
 import '../card.dart';
@@ -44,27 +45,30 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.center,
           child: data != null
               ? ListView.builder(
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text(data[index]["title"]),
-                      subtitle: Text("Id:${data[index]["id"]}"),
-                      leading: Image.network(data[index]["url"]),
-                    ),
-                  );
-                },
-                itemCount: data.length,
-              )
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        title: Text(data[index]["title"]),
+                        subtitle: Text("Id:${data[index]["id"]}"),
+                        leading: Image.network(data[index]["url"]),
+                      ),
+                    );
+                  },
+                  itemCount: data.length,
+                )
               : CircularProgressIndicator(),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           myText = _controller.text;
-          setState(() {});
+          setState(() {
+            Constants.prefs.setBool("LoggedIn", false);
+            Navigator.pushReplacementNamed(context, "/login");
+          });
         },
-        child: Icon(Icons.refresh),
+        child: Icon(Icons.logout),
       ),
     );
   }
